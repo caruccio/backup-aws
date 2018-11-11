@@ -22,6 +22,7 @@ class GCE(Provider):
         ts = datetime.utcnow().strftime('%Y%m%d-%H%M%S')
         name = f'{pv.metadata.name}-{ts}'
         gce_pd_name = pv.spec.gce_persistent_disk.pd_name
+        gce_pd_zone = pv.metadata.labels['failure-domain.beta.kubernetes.io/zone']
 
         print(f' PD {gce_pd_name} -> ', end='', flush=True)
 
@@ -44,7 +45,7 @@ class GCE(Provider):
         try:
             snapshot = self.disks.createSnapshot(
                 project=self.project_id,
-                zone=self.zone,
+                zone=gce_pd_zone,
                 disk=gce_pd_name,
                 body={'name': name, 'labels': labels}).execute()
             ret['snapshot'] = snapshot
