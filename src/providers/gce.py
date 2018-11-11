@@ -48,7 +48,7 @@ class GCE(Provider):
                 disk=gce_pd_name,
                 body={'name': name, 'labels': labels}).execute()
             ret['snapshot'] = snapshot
-            print(f'{snapshot["name"]} [{pv.spec.capacity.storage}] {labels}')
+            print(f'{snapshot["name"]} {labels}')
         except Exception as ex:
             traceback.print_exc()
             ret['err'] = str(ex)
