@@ -26,7 +26,7 @@ push-latest: tag
 
 .PHONY: lint
 lint:
-	pylint -E *.py providers/
+	pylint -E src/
 
 .PHONY: exec
 exec:

@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 ENV HOME=/usr/src/app \
     PATH=/usr/src/app:$PATH
 
-COPY container-entrypoint run requirements.txt backup.py providers ./
+COPY src/ container-entrypoint requirements.txt ./
 
 RUN apk add --no-cache bash coreutils && \
     pip install --no-cache-dir -r requirements.txt
